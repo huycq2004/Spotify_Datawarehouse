@@ -24,3 +24,18 @@ This project creates a data warehouse for Spotify song data. It reads data from 
     ```bash
     python create_warehouse.py
     ```
+
+## Project Structure
+
+```
+D:\DataWH\
+├── .git/
+├── .env
+├── .gitignore
+├── connect_to_postgre.py
+├── create_warehouse.py
+├── query_data.py
+├── README.md
+├── requirements.txt
+└── visualize_data.py
+```
