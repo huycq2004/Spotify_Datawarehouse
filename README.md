@@ -29,13 +29,13 @@ This project creates a data warehouse for Spotify song data. It reads data from 
 
 ```
 D:\DataWH\
-├── .git/
-├── .env
-├── .gitignore
-├── connect_to_postgre.py
-├── create_warehouse.py
-├── query_data.py
-├── README.md
-├── requirements.txt
-└── visualize_data.py
+├── .git/                     # Git version control directory
+├── .env                      # Stores sensitive environment variables (e.g., database credentials)
+├── .gitignore                # Specifies intentionally untracked files to ignore by Git
+├── connect_to_postgre.py     # Contains functions to test the PostgreSQL database connection
+├── create_warehouse.py       # Script to create the data warehouse schema and load data from the CSV
+├── query_data.py             # Script to query specific information (e.g., top Japanese artists/songs) from the data warehouse
+├── README.md                 # Project documentation, including setup, features, and file descriptions
+├── requirements.txt          # Lists Python dependencies required for the project
+└── visualize_data.py         # Script to generate data visualizations (e.g., bar charts) from the data warehouse
 ```
