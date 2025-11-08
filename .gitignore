@@ -1,0 +1,11 @@
+# Environments
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Data files
+universal_top_spotify_songs.csv
