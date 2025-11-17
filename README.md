@@ -609,3 +609,196 @@ for row in cur.fetchall():
 - ✅ **Scalable** cho đồ án học tập
 
 ---
+
+## 📊 Dashboard Trực quan - Phân tích Xu hướng Âm nhạc Toàn cầu
+
+### 🎵 Giới thiệu Dashboard
+
+Dashboard được xây dựng bằng **Streamlit** và **Plotly**, cung cấp giao diện trực quan để phân tích:
+- 🌍 **Xu hướng âm nhạc toàn cầu** - Top bài hát, thể loại trending
+- 🎤 **Độ phổ biến nghệ sĩ** - Top nghệ sĩ, độ phủ sóng quốc tế
+- 🌏 **Phân tích theo khu vực** - So sánh châu lục, thị trường lớn nhất
+- 📅 **Phân tích thời gian** - Xu hướng theo ngày, tuần, tháng
+- 💿 **Album & Thể loại** - Phân tích album phổ biến, xu hướng phát hành
+- 🎶 **Audio Features** - Đặc điểm âm thanh ảnh hưởng đến độ phổ biến
+
+### 🚀 Cài đặt và Chạy Dashboard
+
+#### Bước 1: Cài đặt các thư viện cần thiết
+
+```bash
+pip install -r requirements.txt
+```
+
+Hoặc cài thủ công:
+
+```bash
+pip install streamlit plotly psycopg2-binary pandas python-dotenv
+```
+
+#### Bước 2: Cấu hình Database
+
+Đảm bảo file `.env` đã có thông tin kết nối database:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=spotify_data_warehouse
+DB_USER=postgres
+DB_PASS=your_password
+```
+
+#### Bước 3: Chạy Dashboard
+
+```bash
+streamlit run dashboard.py
+```
+
+Dashboard sẽ tự động mở trong trình duyệt tại địa chỉ: `http://localhost:8501`
+
+### 📋 Các Truy vấn Phân tích
+
+File `sql_queries.py` chứa **25+ truy vấn SQL** được tổ chức theo nhóm:
+
+#### 1. **Xu hướng Âm nhạc Toàn cầu**
+- Top 20 bài hát phổ biến nhất
+- Xu hướng bài hát theo thời gian (30 ngày)
+- Phân tích theo thể loại âm nhạc
+- Đặc điểm âm thanh của bài trending
+
+#### 2. **Độ phổ biến Nghệ sĩ**
+- Top 20 nghệ sĩ phổ biến nhất
+- Nghệ sĩ có độ phủ sóng quốc tế cao
+- Nghệ sĩ đang trending (tăng trưởng nhanh)
+- Phân tích followers nghệ sĩ
+
+#### 3. **Phân tích theo Quốc gia & Khu vực**
+- Top bài hát theo từng quốc gia
+- So sánh độ phổ biến giữa các châu lục
+- Thị trường âm nhạc lớn nhất
+- Sở thích âm nhạc theo khu vực
+
+#### 4. **Phân tích theo Thời gian**
+- Xu hướng theo ngày trong tuần
+- Xu hướng theo tháng
+- Bài hát giữ vị trí #1 lâu nhất
+
+#### 5. **Album và Bài hát**
+- Album phổ biến nhất
+- Phân tích theo loại album
+- Xu hướng phát hành theo năm
+
+#### 6. **Đặc điểm Âm thanh**
+- Mối quan hệ giữa audio features và độ phổ biến
+- Phân tích mood của bài hát
+- So sánh explicit vs non-explicit
+- Phân tích theo độ dài bài hát
+
+### 📸 Các Tính năng Dashboard
+
+#### 🎯 Metrics Tổng quan
+Dashboard hiển thị các metrics chính:
+- Tổng số bài hát
+- Tổng số nghệ sĩ
+- Số quốc gia
+- Tổng số album
+- Độ phổ biến trung bình
+- Độ phổ biến tối đa
+
+#### 📊 Biểu đồ Trực quan
+- **Bar Charts** - So sánh top bài hát, nghệ sĩ
+- **Line Charts** - Xu hướng theo thời gian
+- **Pie Charts** - Phân bố thể loại, mood
+- **Scatter Plots** - Mối quan hệ giữa các metrics
+- **Heatmaps** - Phân tích audio features
+- **Interactive Tables** - Dữ liệu chi tiết
+
+#### 🎨 Giao diện
+- Responsive layout với Streamlit
+- Color scheme Spotify (Green #1DB954)
+- Interactive charts với Plotly
+- Tabs navigation cho từng phân tích
+- Sidebar với thông tin hướng dẫn
+
+### 🔍 Ví dụ Sử dụng
+
+#### Truy vấn trực tiếp từ Python:
+
+```python
+from sql_queries import ALL_QUERIES
+import psycopg2
+import pandas as pd
+
+# Kết nối database
+conn = psycopg2.connect(
+    host="localhost",
+    database="spotify_data_warehouse",
+    user="postgres",
+    password="your_password"
+)
+
+# Lấy top 20 bài hát phổ biến
+df = pd.read_sql_query(ALL_QUERIES['top_songs_global'], conn)
+print(df)
+
+# Phân tích nghệ sĩ có độ phủ sóng quốc tế
+df = pd.read_sql_query(ALL_QUERIES['artists_global_reach'], conn)
+print(df)
+
+# Xu hướng theo thể loại
+df = pd.read_sql_query(ALL_QUERIES['genre_trends'], conn)
+print(df)
+```
+
+### 📦 Cấu trúc File
+
+```
+Spotify_Datawarehouse/
+├── dashboard.py              # Streamlit dashboard chính
+├── sql_queries.py            # 25+ SQL queries phân tích
+├── create_warehouse.py       # Script tạo warehouse
+├── connect_to_postgre.py     # Test kết nối DB
+├── create_visualizations.py  # Matplotlib visualizations (legacy)
+├── requirements.txt          # Dependencies
+├── .env                      # Database credentials
+└── README.md                # Documentation
+```
+
+### 🎓 Ứng dụng trong Đồ án
+
+Dashboard này phù hợp cho:
+- ✅ **Đồ án Kho Dữ liệu** (Data Warehouse)
+- ✅ **Đồ án Phân tích Dữ liệu** (Data Analytics)
+- ✅ **Đồ án Business Intelligence** (BI)
+- ✅ **Đồ án Trực quan hóa Dữ liệu** (Data Visualization)
+
+### 💡 Tips & Tricks
+
+1. **Performance**: Dashboard sử dụng `@st.cache_data` để cache queries (TTL 10 phút)
+2. **Customization**: Thay đổi color scheme trong file `dashboard.py`
+3. **Add queries**: Thêm queries mới vào `sql_queries.py` và update dashboard
+4. **Export data**: Streamlit hỗ trợ download dataframes dưới dạng CSV
+
+### 🐛 Troubleshooting
+
+**Lỗi kết nối database:**
+```bash
+# Kiểm tra PostgreSQL đang chạy
+psql -U postgres -d spotify_data_warehouse
+
+# Kiểm tra file .env
+cat .env
+```
+
+**Lỗi import module:**
+```bash
+# Reinstall dependencies
+pip install -r requirements.txt --upgrade
+```
+
+**Dashboard chạy chậm:**
+- Tăng TTL của cache trong `@st.cache_data(ttl=600)`
+- Giảm số lượng records trong queries (thêm LIMIT)
+- Tối ưu queries với indexes
+
+---

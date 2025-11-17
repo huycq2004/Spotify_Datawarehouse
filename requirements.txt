@@ -1,4 +1,7 @@
-psycopg2-binary
+psycopg2
 pandas
 python-dotenv
 matplotlib
+seaborn
+streamlit
+plotly
