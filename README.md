@@ -609,7 +609,3 @@ for row in cur.fetchall():
 - ✅ **Scalable** cho đồ án học tập
 
 ---
-
-**Created by:** Sinh viên làm đồ án Kho Dữ Liệu  
-**Version:** 1.0  
-**Last Updated:** November 2025
